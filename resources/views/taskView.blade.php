@@ -17,8 +17,9 @@
 
 <body>
 
+    <livewire:task-component>
 
-    @livewireScripts
+        @livewireScripts
 </body>
 
 </html>
