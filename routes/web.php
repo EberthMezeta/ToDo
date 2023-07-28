@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', function () {
+        return view('loginView');
+    })->name('login');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');;
+});
+
+
 Route::get('/', function () {
-    return view('taskView');
+    if (!(auth()->check())) {
+        return redirect()->route('login');
+    }
+    return redirect()->route('home');
+});
+
+Route::get('/register', function () {
+    if (!(auth()->check())) {
+        return  view('registerView');
+    }
+    return redirect()->route('home');
+});
+
+
+Route::middleware('auth')->get('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
 });

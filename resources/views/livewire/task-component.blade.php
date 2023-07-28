@@ -11,10 +11,6 @@
         <h3>{{ session('message') }}</h3>
     @endif
 
-    <input type="text" wire:model="title" />
-    <input type="text" wire:model="description" />
-    <button wire:click="createTask">Agregar tarea</button>
-
     @forelse($tasks as $task)
         <li>
             <h3>{{ $task->title }}</h3>
