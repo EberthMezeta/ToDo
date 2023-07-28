@@ -16,9 +16,9 @@
 </head>
 
 <body>
-    <a href="/logout">Cerrar sesión</a>
-    <livewire:task-component>
 
+    <livewire:login>
+        <a href="/register">Registrar nuevo usuario</a>
         @livewireScripts
 </body>
 

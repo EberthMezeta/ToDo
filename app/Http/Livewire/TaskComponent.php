@@ -20,7 +20,8 @@ class TaskComponent extends Component
 
     public function mount()
     {
-        $this->loadTasksForUser(1);
+        $userId = auth()->id();
+        $this->loadTasksForUser($userId);
         $this->task = new Task();
     }
 
@@ -28,7 +29,7 @@ class TaskComponent extends Component
     {
         $this->validate();
 
-        $this->task->user_id = 1;
+        $this->task->user_id = auth()->id();
 
         $this->task->save();
         $this->task = new Task();
@@ -38,20 +39,6 @@ class TaskComponent extends Component
     }
 
 
-    public function createTask()
-    {
-        Task::create([
-            'title' => $this->title,
-            'description' => $this->description,
-            'user_id' => 1,
-        ]);
-
-        // Limpiar el campo del formulario después de agregar la tarea
-        $this->title = '';
-        $this->description = '';
-        // Volver a cargar todas las tareas después de agregar una nueva tarea
-        $this->loadTasksForUser(1);
-    }
 
     public function deleteTask($taskId)
     {
@@ -60,7 +47,8 @@ class TaskComponent extends Component
         if (!is_null($taskToDelete)) {
             $taskToDelete->delete();
         }
-        $this->loadTasksForUser(1);
+        $userId = auth()->id();
+        $this->loadTasksForUser($userId);
     }
 
     public function updateTask(Task $task)
