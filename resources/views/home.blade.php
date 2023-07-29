@@ -10,16 +10,24 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <!-- Styles -->
     @livewireStyles
 </head>
 
-<body>
-    <a href="/logout">Cerrar sesión</a>
-    <livewire:task-component>
-
-        @livewireScripts
+<body class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="container">
+        <div class="d-flex justify-content-end mb-3">
+            <a href="/logout" class="btn btn-danger">Cerrar sesión</a>
+        </div>
+        <livewire:task-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
+    @livewireScripts
 </body>
+
 
 </html>
