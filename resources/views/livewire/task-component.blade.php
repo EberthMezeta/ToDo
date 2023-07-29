@@ -1,26 +1,25 @@
 <div>
-    <form wire:submit.prevent="save">
-        <input type="text" wire:model="task.title">
-
-        <textarea wire:model="task.description"></textarea>
-
-        <button type="submit">Save</button>
-    </form>
-
-    @if (session()->has('message'))
-        <h3>{{ session('message') }}</h3>
+    <!-- Formulario para agregar una nueva tarea -->
+    <input type="text" wire:model="title" placeholder="Título">
+    <input type="text" wire:model="description" placeholder="Descripción">
+    @if (!$taskIdBeingEdited)
+        <button wire:click="createTask">Agregar tarea</button>
+    @else
+        <button type="button" wire:click="updateTask">Guardar cambios</button>
+        <button type="button" wire:click="cancelEdit">Cancelar</button>
     @endif
 
-    @forelse($tasks as $task)
-        <li>
-            <h3>{{ $task->title }}</h3>
-            <p>{{ $task->description }}</p>
-            <input type="checkbox" wire:click="done({{ $task->id }})">
-            <button wire:click="deleteTask({{ $task->id }})">Eliminar</button>
-            <button wire:click="updateTask({{ $task->id }})">Editar</button>
-        </li>
-    @empty
-        <h3>No hay tareas</h3>
-    @endforelse
+    <!-- Lista de tareas -->
+    <ul>
+        @foreach ($tasks as $task)
+            <li>
+                {{ $task->title }} - {{ $task->description }}
+                <input type="checkbox" wire:click="toggleTaskDoneStatus({{ $task->id }})"
+                    wire:model="tasks.{{ $loop->index }}.done">
+                <button wire:click="editTask({{ $task->id }})">Editar</button>
+                <button wire:click="deleteTask({{ $task->id }})">Eliminar</button>
+            </li>
+        @endforeach
+    </ul>
 
 </div>
